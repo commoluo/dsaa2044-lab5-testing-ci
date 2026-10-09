@@ -1,0 +1,142 @@
+DSAA 2044 LAB 5: STEP-BY-STEP STUDENT SETUP
+Complete this before the lab. Keep this file open while following the steps.
+
+WHAT YOU NEED
+Node.js 24 and npm, your own fork or a downloaded source copy, and a text editor.
+An editor such as VS Code is optional. No Android SDK, emulator, database,
+global Vitest installation, or ChatGPT subscription is required.
+
+1. INSTALL NODE.JS 24 AND NPM
+Open the official download page: https://nodejs.org/en/download
+Select the 24.x LTS version, then your operating system and processor.
+For beginners, use the official macOS .pkg or Windows .msi installer.
+It installs Node.js and npm together. Follow the installer prompts.
+
+On a Mac, use Apple menu > About This Mac to check your processor.
+Apple M-series chips are ARM64. Intel Macs are x64.
+On Windows, check Settings > System > About > System type.
+If you already use a Node version manager, use it to select Node.js 24.
+Do not install a second version manager just for this lab.
+
+Close old terminal windows after installation and open a new one.
+On macOS, open Terminal. On Windows, open Terminal or PowerShell.
+Run each line separately:
+
+  node --version
+  npm --version
+
+The first command should show v24.x.x. The second should show a version number.
+If either command is missing, reopen the terminal and check the installation.
+
+2. GET YOUR OWN COPY OF THE PROJECT
+Open https://github.com/commoluo/dsaa2044-lab5-testing-ci
+For GitHub Actions practice, click Fork and create a fork in your own account.
+Use your fork's Code button to copy its HTTPS clone address, then run:
+  git clone YOUR_FORK_HTTPS_ADDRESS
+  cd dsaa2044-lab5-testing-ci
+Replace YOUR_FORK_HTTPS_ADDRESS with the actual address shown by GitHub.
+If Git is not installed, follow the setup instructions from the course's Git lab.
+
+For local practice only, Code > Download ZIP is another option.
+Extract the ZIP completely. Do not work inside its preview.
+Open the extracted project folder, usually dsaa2044-lab5-testing-ci-main.
+You should see package.json, package-lock.json, src, tests, and demo.
+If an outer folder contains another project folder, use the inner folder that
+actually contains package.json. Downloading a ZIP does not set up a Git remote;
+use a cloned fork if you want to commit and push your exercise.
+
+3. OPEN A TERMINAL IN THE PROJECT FOLDER
+In VS Code, open this folder, then choose Terminal > New Terminal.
+Without VS Code, use cd followed by your folder's full path in double quotes.
+
+Example for macOS, if you extracted the folder into Downloads:
+  cd "$HOME/Downloads/dsaa2044-lab5-testing-ci"
+
+Example for Windows, if you extracted it into Downloads:
+  cd "$env:USERPROFILE\Downloads\dsaa2044-lab5-testing-ci"
+
+Adjust the path if you chose a different destination.
+On macOS, you can also type cd and a space, drag the folder into Terminal,
+and press Enter. The quotes matter when a path contains spaces.
+
+Check that you are in the right directory:
+macOS:   ls
+Windows: dir
+The output must include package.json and package-lock.json.
+
+4. INSTALL THE PROJECT DEPENDENCIES
+Run this from the project directory while connected to the internet:
+
+  npm ci
+
+This installs the versions already recorded in package-lock.json, including
+Vitest 5.0.3 and TypeScript 7.0.2. It creates the node_modules folder.
+It does not require npm install -g, sudo, or an npm account.
+Keep package-lock.json. Do not add node_modules to Git.
+Install before class, not during the 15-minute exercise.
+
+5. CHECK TYPES AND RUN TESTS
+Run each line separately:
+
+  npm run typecheck
+  npm test
+
+The type check should finish without errors.
+The test result should show one test file passed and six tests passed.
+
+6. RUN THE PROGRAM AND THE FAILURE DEMONSTRATION
+Run the shipping program:
+
+  npm run demo:app
+
+It prints inputs 0, 50, 99, 100, and 101 with their shipping fees.
+Then run:
+
+  npm run demo:fail
+
+This command is supposed to fail. Input 100 produces 10, while the test expects 0.
+Open demo/shipping-buggy.ts. Change amount > 100 to amount >= 100, save the file,
+then run npm run demo:fail again. The same boundary test should pass.
+Restore > afterwards if you want to repeat the demonstration.
+
+An alternative that requires no edits is:
+  npm run demo:fixed
+It runs the same boundary assertion against the correct src/shipping.ts function.
+The normal npm test command always runs the six tests under tests/.
+
+7. SHOW THE TA THAT YOU ARE READY
+You can locate src/shipping.ts and tests/shipping.test.ts.
+Your type check succeeds and the normal suite reports six passing tests.
+You can explain why the separate faulty demonstration is expected to fail.
+
+COMMON PROBLEMS
+"package.json not found" or ENOENT:
+  You are in the wrong folder. Use the folder that contains package.json.
+"node/npm not found" or "npm is not recognized":
+  Reopen the terminal after installing Node.js, then check the versions again.
+PowerShell says npm.ps1 cannot run:
+  Use npm.cmd in place of npm, for example npm.cmd ci and npm.cmd test,
+  or use Command Prompt. Do not change the system execution policy for this lab.
+Timeout, EAI_AGAIN, or ECONNRESET during installation:
+  Check the network and proxy connection, then retry before class.
+  Keep the exact error message for the TA. Do not delete the lockfile.
+"Unsupported engine" or TypeScript file-extension errors:
+  Check node --version and use Node.js 24 for the classroom baseline.
+An optional fsevents install-script warning from a newer npm on macOS:
+  If the type check and normal tests pass, continue with the lab.
+  Do not enable installation scripts globally. If a check fails, show the TA
+  the exact error message before changing installation policy.
+Normal npm test fails after you changed the threshold to 150:
+  The expectations for 100 and 101 must also change with the requirements.
+
+ABOUT GITHUB ACTIONS
+Local testing works without a GitHub account after dependencies are installed.
+The CI portion additionally needs internet access, your GitHub repository,
+and its workflow file. A local passing test is not proof of a hosted CI run.
+The repository setup is described in README.md and the course's Git lab.
+
+OFFICIAL REFERENCES
+Node.js download: https://nodejs.org/en/download
+Node/npm installation: https://docs.npmjs.com/downloading-and-installing-node-js-and-npm/
+npm ci: https://docs.npmjs.com/cli/v11/commands/npm-ci/
+Node.js TypeScript support: https://nodejs.org/docs/latest-v24.x/api/typescript.html

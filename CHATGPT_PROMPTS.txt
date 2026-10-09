@@ -1,0 +1,41 @@
+TEST CASE DESIGN
+
+Suggest missing tests for this TypeScript function using Vitest.
+Requirements:
+- amount must be finite and non-negative.
+- amounts below 100 have a shipping fee of 10.
+- amounts of 100 or more have a shipping fee of 0.
+- invalid amounts throw RangeError.
+
+First give a short table of input, expected result, and reason.
+Then write Vitest tests with explicit imports from 'vitest'.
+Treat the requirements as the source of the expected results.
+Keep the implementation unchanged.
+Use only the dependencies already in the project.
+
+[Paste src/shipping.ts and the existing tests here.]
+
+
+FAILURE DIAGNOSIS
+
+Explain this failing Vitest test for a beginner.
+Identify the input, expected result, and actual result.
+Compare the result with the stated requirement.
+Suggest the smallest code correction, and explain which test verifies it.
+Keep the expected value consistent with the requirement.
+
+[Paste the shipping requirements, failing assertion, and relevant function here.]
+
+
+REVIEW OF GENERATED TESTS
+
+Review these tests against the shipping requirements.
+Check ordinary inputs, the exact threshold, and invalid inputs.
+Explain which meaningful bug each test could detect.
+List any assumptions or missing requirements instead of inventing rules.
+
+[Paste the requirements and generated tests here.]
+
+
+Source for prompting principles:
+https://learn.chatgpt.com/docs/prompting

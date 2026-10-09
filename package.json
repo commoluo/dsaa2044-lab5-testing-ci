@@ -1,0 +1,21 @@
+{
+  "name": "dsaa2044-lab5-vitest-demo",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": "^22.12.0 || ^24.0.0 || >=26.0.0"
+  },
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "demo:app": "node demo/show-shipping.mjs",
+    "demo:fail": "vitest run --config demo/vitest.config.ts",
+    "demo:fixed": "vitest run --config demo/fixed.config.ts"
+  },
+  "devDependencies": {
+    "typescript": "7.0.2",
+    "vitest": "5.0.3"
+  }
+}
